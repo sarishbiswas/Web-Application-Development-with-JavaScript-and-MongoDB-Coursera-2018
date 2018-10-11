@@ -1,0 +1,12 @@
+body {
+  padding: 10px;
+  font-family: sans-serif;
+}
+.top-margin{
+	margin-top: 60px;
+}
+#viewer_iframe{
+	border: 1px solid red;
+	resize: both;
+	width: 100%;
+}

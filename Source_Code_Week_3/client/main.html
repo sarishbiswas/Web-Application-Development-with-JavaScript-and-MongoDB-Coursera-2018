@@ -1,0 +1,89 @@
+<head>
+  <title>textcircle</title>
+</head>
+
+<body>
+  {{> navbar}}
+  <div class="container top-margin">
+    <div class="row">
+        <div class="col-md-12">
+          {{> docMeta}}
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        {{> editingUsers}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        {{> editor}}
+      </div>
+      <div class="col-md-6">
+        {{> viewer}}
+      </div>
+    </div>
+<!-- {{> date_display}} -->
+
+     
+  </div>
+
+</body>
+
+
+<template name="navbar">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">TextCircle</a>
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="#" class="js-add-doc"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New</a>
+        </li>
+        <li class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Documents<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          {{#each documents}}
+          <li><a href="#" class="js-load-doc">{{title}}</a></li>
+          {{/each}}
+        </ul>
+      </li>
+      </ul>
+      <a class="navbar-brand navbar-right" href="#">{{> loginButtons align="right"}}</a>
+    </div>
+  </nav>
+</template>
+
+
+<template name="editor">
+  {{>sharejsCM onRender=config docid=docid id="editor"}}
+</template>
+
+<!-- <template name="date_display">
+  {{current_date}}
+</template> -->
+<template name="viewer">
+  <iframe id="viewer_iframe"></iframe>
+</template>
+
+<template name="editingUsers">
+  Editors:
+  {{#each users}}
+  <span class="label label-success">
+    {{firstname}}
+  </span>
+  {{/each}}
+</template>
+
+
+<template name="docMeta">
+  {{#with document}}
+  <span class="h1">{{> editableText collection="documents" field="title"}}</span>
+  {{#if canEdit}}
+  <div class="checkbox">
+    <label><input type="checkbox" class="js-tog-private">Private</label>
+  </div>
+  {{/if}}
+  {{/with}}
+</template>
